@@ -7,6 +7,7 @@ load_dotenv()
 
 openai = AsyncOpenAI()
 
+
 async def text_to_audio(text, tone_and_style_insructions):
     async with openai.audio.speech.with_streaming_response.create(
         model="gpt-4o-mini-tts",
@@ -16,6 +17,7 @@ async def text_to_audio(text, tone_and_style_insructions):
         response_format="pcm",
     ) as response:
         await LocalAudioPlayer().play(response)
+
 
 if __name__ == "__main__":
     asyncio.run(text_to_audio("Hello world!", "Enthusiastic voice."))
